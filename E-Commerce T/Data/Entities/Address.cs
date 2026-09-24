@@ -11,5 +11,6 @@
         public long userId { get; set; }
         public User user { get; set; }
 
+
     }
 }

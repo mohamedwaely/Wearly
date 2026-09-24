@@ -11,7 +11,7 @@ namespace E_Commerce_T.Data.ModelConfig
             builder.ToTable("users");
             builder.HasKey(x => x.id);
             builder.Property(x=>x.userName).IsRequired(true).HasMaxLength(70);
-            builder.Property(x => x.password).IsRequired(true).HasMaxLength(50);
+            builder.Property(x => x.password).IsRequired(true).HasMaxLength(200);
             builder.Property(x => x.email).IsRequired(true).HasMaxLength(100);
             builder.Property(x => x.role).IsRequired(true);
             builder.Property(x => x.role).HasConversion<string>();

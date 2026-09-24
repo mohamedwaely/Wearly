@@ -13,7 +13,6 @@ namespace E_Commerce_T.Data.ModelConfig
             builder.Property(o => o.orderedAt).IsRequired();
             builder.Property(o => o.updatedAt).IsRequired();
             builder.Property(o => o.status).IsRequired();
-            builder.Property(o => o.address).IsRequired();
             builder.Property(o => o.TotalAmount).IsRequired().HasPrecision(10, 2);
 
             builder.HasOne(o => o.user)
@@ -26,6 +25,10 @@ namespace E_Commerce_T.Data.ModelConfig
                 .HasForeignKey(oi => oi.orderId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasOne(o => o.address)
+                .WithMany()
+                .HasForeignKey(o => o.AddressId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

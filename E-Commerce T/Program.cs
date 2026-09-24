@@ -29,11 +29,13 @@ namespace E_Commerce_T
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
             builder.Services.AddScoped<RegisterService>();
-            builder.Services.AddSingleton<JwtSettings>();
+            builder.Services.AddScoped<LoginService>();
+
+
+            //builder.Services.AddSingleton<JwtSettings>();
             builder.Services.AddSingleton<JwtCon>();
 
 
-            var app = builder.Build();
             var siginingKey = builder.Configuration.GetSection("JwtSettings:SigningKey").Value;
 
             builder.Services.AddAuthentication(options =>
@@ -54,6 +56,8 @@ namespace E_Commerce_T
                 });
 
             builder.Services.AddAuthorization();
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
