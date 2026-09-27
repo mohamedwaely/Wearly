@@ -15,7 +15,7 @@ namespace E_Commerce_T.Data.ModelConfig
             builder.Property(pv=>pv.discountPercentage).IsRequired(false).HasColumnType("decimal(5,2)");
             builder.Property(pv => pv.discountStartDate).IsRequired(false);
             builder.Property(pv => pv.discountEndDate).IsRequired(false);
-            builder.Property(pv => pv.isActive).IsRequired();
+            builder.Property(pv => pv.IsActive).IsRequired();
 
 
         }

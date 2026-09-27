@@ -4,10 +4,12 @@
     {
         public long id { get; set; }
         public long quantity { get; set; }
-        public decimal price { get; set; }
+        
         public decimal? discountPercentage { get; set; }
         public DateTime? discountStartDate { get; set; }
         public DateTime? discountEndDate { get; set; }
+
+        public decimal price { get; set; }
 
         public long productId { get; set; }
         public Product product { get; set; }
@@ -16,7 +18,7 @@
         public long colorId { get; set; }
         public Color color { get; set; }
 
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

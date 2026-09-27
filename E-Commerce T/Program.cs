@@ -30,6 +30,8 @@ namespace E_Commerce_T
 
             builder.Services.AddScoped<RegisterService>();
             builder.Services.AddScoped<LoginService>();
+            builder.Services.AddScoped<NewProductService>();
+            builder.Services.AddScoped<NewProductVariantService>();
 
 
             //builder.Services.AddSingleton<JwtSettings>();
