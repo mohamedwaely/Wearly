@@ -32,6 +32,8 @@ namespace E_Commerce_T
             builder.Services.AddScoped<LoginService>();
             builder.Services.AddScoped<NewProductService>();
             builder.Services.AddScoped<NewProductVariantService>();
+            builder.Services.AddScoped<NewCartService>();
+            builder.Services.AddScoped<NewCartItemService>();
 
 
             //builder.Services.AddSingleton<JwtSettings>();

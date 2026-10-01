@@ -9,9 +9,11 @@ namespace E_Commerce_T.Services
     public class RegisterService
     {
         private readonly AppDbContext _context;
-        public RegisterService(AppDbContext context)
+        private NewCartService _newCartService;
+        public RegisterService(AppDbContext context, NewCartService newCartService)
         {
             _context = context;
+            _newCartService = newCartService;
         }
 
         public async Task<AuthResDTO> RegisterNewUser (RegisterReqDTO NUser)
@@ -36,11 +38,14 @@ namespace E_Commerce_T.Services
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
+            var newCart = await _newCartService.NewCart(user.id);
+
             var res = new AuthResDTO
             {
                 id = user.id,
                 email = user.email,
                 username = user.userName,
+                CartId = newCart.id,
                 token = String.Empty
             };
 

@@ -19,7 +19,7 @@ namespace E_Commerce_T.Services
         public async Task<AuthResDTO> loginS(LoginReqDTO req)
         {
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == req.email);
+            var user = await _context.Users.Include(u => u.cart).FirstOrDefaultAsync(u => u.email == req.email);
             if (user is null || !BCrypt.Net.BCrypt.Verify(req.password, user.password))
             {
                 throw new UnauthorizedAccessException("Invalid email or password");
@@ -33,6 +33,7 @@ namespace E_Commerce_T.Services
                 id = user.id,
                 username = user.userName,
                 email = user.email,
+                CartId = user.cart.id,
                 token = token
             };
 
