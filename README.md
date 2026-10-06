@@ -1,5 +1,9 @@
 # Waerly E-Commerce
 
+```mermaid
+---
+title: Waerly E-Commerce - Entity Relationship Diagram
+---
 erDiagram
     User {
         long id PK
@@ -9,6 +13,7 @@ erDiagram
         DateTime createdAt
         UserRole role "enum: Admin, User"
     }
+
     Address {
         long id PK
         string street
@@ -17,18 +22,21 @@ erDiagram
         string postalCode
         long userId FK
     }
+
     Cart {
         long id PK
         DateTime createdAt
         DateTime updatedAt
         long userId FK
     }
+
     CartItems {
         long id PK
         long cartId FK
         long productVariantId FK
         int quantity
     }
+
     Order {
         long id PK
         DateTime orderedAt
@@ -38,6 +46,7 @@ erDiagram
         long AddressId FK
         decimal TotalAmount
     }
+
     OrderItems {
         long id PK
         long orderId FK
@@ -48,15 +57,18 @@ erDiagram
         string SizeName "snapshot"
         decimal Price "snapshot"
     }
+
     Category {
         long id PK
         string name
         long parentCategoryId FK "nullable, self-reference"
     }
+
     Brand {
         long id PK
         string name
     }
+
     Product {
         long id PK
         string name
@@ -66,6 +78,7 @@ erDiagram
         long categoryId FK
         long brandId FK
     }
+
     ProductVariant {
         long id PK
         long quantity
@@ -78,15 +91,18 @@ erDiagram
         long sizeId FK
         long colorId FK
     }
+
     Size {
         long id PK
         string name
         SizeType type "enum: Clothing, Footwear"
     }
+
     Color {
         long id PK
         string name "assumed - class not provided"
     }
+
     User ||--o| Cart : "owns"
     User ||--o| Address : "has"
     User ||--o{ Order : "places"
@@ -101,3 +117,4 @@ erDiagram
     Color ||--o{ ProductVariant : "colors"
     ProductVariant ||--o{ CartItems : "added to"
     ProductVariant ||--o{ OrderItems : "ordered as"
+```
