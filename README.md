@@ -1,4 +1,4 @@
-# Waerly E-Commerce
+# Wearly E-Commerce
 
 ```mermaid
 ---
