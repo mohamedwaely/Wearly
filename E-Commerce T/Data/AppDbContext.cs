@@ -16,6 +16,7 @@ namespace E_Commerce_T.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Size> Sizes { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

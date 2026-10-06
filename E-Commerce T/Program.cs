@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -16,15 +15,12 @@ namespace E_Commerce_T
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<AppDbContext>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr")
-                ));
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
 
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
@@ -34,11 +30,9 @@ namespace E_Commerce_T
             builder.Services.AddScoped<NewProductVariantService>();
             builder.Services.AddScoped<NewCartService>();
             builder.Services.AddScoped<NewCartItemService>();
+            builder.Services.AddScoped<NewOrderService>();
 
-
-            //builder.Services.AddSingleton<JwtSettings>();
             builder.Services.AddSingleton<JwtCon>();
-
 
             var siginingKey = builder.Configuration.GetSection("JwtSettings:SigningKey").Value;
 
@@ -47,8 +41,10 @@ namespace E_Commerce_T
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer(
-                options => options.TokenValidationParameters = new TokenValidationParameters
+            .AddJwtBearer(options => 
+            {
+                options.MapInboundClaims = false;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
                     ValidateIssuer = false,
@@ -56,8 +52,8 @@ namespace E_Commerce_T
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(siginingKey)),
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
-
-                });
+                };
+            });
 
             builder.Services.AddAuthorization();
 
@@ -73,7 +69,6 @@ namespace E_Commerce_T
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
