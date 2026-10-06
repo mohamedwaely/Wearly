@@ -2,7 +2,7 @@
 
 ```mermaid
 ---
-title: Waerly E-Commerce - Entity Relationship Diagram
+title: Wearly E-Commerce - Entity Relationship Diagram
 ---
 erDiagram
     User {
